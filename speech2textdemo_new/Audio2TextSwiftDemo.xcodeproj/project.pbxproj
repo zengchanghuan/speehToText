@@ -18,7 +18,6 @@
 		84527054299DC7F300E92DBE /* DownloadManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84527053299DC7F300E92DBE /* DownloadManager.mm */; };
 		84527057299DC8B600E92DBE /* AVCodeParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 84527056299DC8B600E92DBE /* AVCodeParam.m */; };
 		8E41FC4929C1749100F05AB2 /* AgoraWebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E41FC4829C1749100F05AB2 /* AgoraWebSocketManager.swift */; };
-		8E41FC4B29C17F8800F05AB2 /* RestfulManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E41FC4A29C17F8800F05AB2 /* RestfulManager2.swift */; };
 		A818D64227F85E88003E4603 /* STTFilesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A818D64127F85E88003E4603 /* STTFilesManager.m */; };
 		A818D64927F85E9C003E4603 /* STTFilesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A818D64427F85E9B003E4603 /* STTFilesTableViewController.m */; };
 		A818D64A27F85E9C003E4603 /* STTChannelSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A818D64527F85E9B003E4603 /* STTChannelSTableViewController.m */; };
@@ -68,7 +67,6 @@
 		84527055299DC8B600E92DBE /* AVCodeParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVCodeParam.h; sourceTree = "<group>"; };
 		84527056299DC8B600E92DBE /* AVCodeParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVCodeParam.m; sourceTree = "<group>"; };
 		8E41FC4829C1749100F05AB2 /* AgoraWebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraWebSocketManager.swift; sourceTree = "<group>"; };
-		8E41FC4A29C17F8800F05AB2 /* RestfulManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestfulManager2.swift; sourceTree = "<group>"; };
 		9F050139709185279E29253B /* Pods-Audio2TextSwiftDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Audio2TextSwiftDemo.debug.xcconfig"; path = "Target Support Files/Pods-Audio2TextSwiftDemo/Pods-Audio2TextSwiftDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		A818D64027F85E88003E4603 /* STTFilesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTFilesManager.h; sourceTree = "<group>"; };
 		A818D64127F85E88003E4603 /* STTFilesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTFilesManager.m; sourceTree = "<group>"; };
@@ -266,7 +264,6 @@
 				A8F785C827EC7CB5007BE8A2 /* Audio2TextProtobuffer.pbobjc.m */,
 				A8AFF35527ED6C0600F37F58 /* TextStreamDataParser.swift */,
 				A8F785B727EAD432007BE8A2 /* RestfulManager.swift */,
-				8E41FC4A29C17F8800F05AB2 /* RestfulManager2.swift */,
 				A8F785B327EACC78007BE8A2 /* StatisticsInfo.swift */,
 				A8F785AE27EACA76007BE8A2 /* VideoView.swift */,
 				A8F785AD27EACA76007BE8A2 /* VideoView.xib */,
@@ -418,7 +415,6 @@
 				A8F785C227EBFD2D007BE8A2 /* UserHeadCell.swift in Sources */,
 				A8F785AA27EAC8D8007BE8A2 /* GlobalSettings.swift in Sources */,
 				A8B9DB77280FC782001C250B /* EditNamesViewController.swift in Sources */,
-				8E41FC4B29C17F8800F05AB2 /* RestfulManager2.swift in Sources */,
 				8412519629934202006AB150 /* LanguageAlertModel.swift in Sources */,
 				84527057299DC8B600E92DBE /* AVCodeParam.m in Sources */,
 				A8F7858927EABEA1007BE8A2 /* AppDelegate.swift in Sources */,
