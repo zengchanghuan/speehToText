@@ -1,0 +1,17 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '11.0'
+
+target 'Audio2TextSwiftDemo' do
+  
+  use_frameworks!
+  pod 'Floaty', '~> 4.2.0'  
+  pod 'AGEVideoLayout', '~> 1.0.2'
+  pod 'AgoraRtcEngine_iOS', '3.6.0.1'
+#  pod 'AgoraMediaPlayer_iOS', '1.2.2'
+  pod 'SnapKit'
+  pod "Protobuf","3.19.4"
+  pod "YYText"
+  pod 'SVProgressHUD','2.2.5'
+  pod 'Starscream', '~> 4.0.0'
+end
+
