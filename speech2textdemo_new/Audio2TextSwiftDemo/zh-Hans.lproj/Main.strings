@@ -1,0 +1,57 @@
+
+/* Class = "UITextField"; placeholder = "token"; ObjectID = "2Vi-0f-oCT"; */
+"2Vi-0f-oCT.placeholder" = "token";
+
+/* Class = "UIBarButtonItem"; title = "name"; ObjectID = "2y5-1z-7ER"; */
+"2y5-1z-7ER.title" = "名字";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "37G-2x-g6z"; */
+"37G-2x-g6z.title" = "Cancel";
+
+/* Class = "UITextField"; placeholder = "appId"; ObjectID = "4dY-R3-EqX"; */
+"4dY-R3-EqX.placeholder" = "appId";
+
+/* Class = "UITextField"; placeholder = "gateway address"; ObjectID = "BpK-yX-SuM"; */
+"BpK-yX-SuM.placeholder" = "gateway address";
+
+/* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "D2G-cW-5HS"; */
+"D2G-cW-5HS.title" = "Save";
+
+/* Class = "UISegmentedControl"; LNO-JV-3q6.segmentTitles[0] = "Live"; ObjectID = "LNO-JV-3q6"; */
+"LNO-JV-3q6.segmentTitles[0]" = "Live";
+
+/* Class = "UISegmentedControl"; LNO-JV-3q6.segmentTitles[1] = "Communication"; ObjectID = "LNO-JV-3q6"; */
+"LNO-JV-3q6.segmentTitles[1]" = "Communication";
+
+/* Class = "UIButton"; configuration.title = "Join"; ObjectID = "Nm9-cH-8iD"; */
+"Nm9-cH-8iD.configuration.title" = "Join";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Nm9-cH-8iD"; */
+"Nm9-cH-8iD.normalTitle" = "加入";
+
+/* Class = "UITextField"; placeholder = "channel"; ObjectID = "PHo-Fr-6mF"; */
+"PHo-Fr-6mF.placeholder" = "频道";
+
+/* Class = "UIButton"; configuration.title = "clear"; ObjectID = "UWW-FQ-ybK"; */
+"UWW-FQ-ybK.configuration.title" = "clear";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "UWW-FQ-ybK"; */
+"UWW-FQ-ybK.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "aec"; ObjectID = "Yul-oa-kfO"; */
+"Yul-oa-kfO.text" = "aec";
+
+/* Class = "UILabel"; text = "agc"; ObjectID = "ZwN-S0-fTc"; */
+"ZwN-S0-fTc.text" = "agc";
+
+/* Class = "UITextField"; placeholder = "languages"; ObjectID = "gwK-uj-HCF"; */
+"gwK-uj-HCF.placeholder" = "languages";
+
+/* Class = "UIButton"; configuration.title = "enter languages"; ObjectID = "smQ-Bk-iqN"; */
+"smQ-Bk-iqN.configuration.title" = "enter languages";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "smQ-Bk-iqN"; */
+"smQ-Bk-iqN.normalTitle" = "输入语言";
+
+/* Class = "UILabel"; text = "ns"; ObjectID = "uVB-UH-RQA"; */
+"uVB-UH-RQA.text" = "ns";

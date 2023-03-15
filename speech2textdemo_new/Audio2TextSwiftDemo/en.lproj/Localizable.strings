@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  Audio2TextSwiftDemo
+
+  Created by admin on 2023/2/10.
+  
+*/
+
+"English" = "English";
+"Hindi" = "Hindi";
+"Korean" = "Korean";
+"Japanese" = "Japanese";
+"German" = "German";
+"Spanish" = "Spanish";
+"French" = "French";
+"Italian" = "Italian";
+"Chinese" = "Chinese";
+"Portuguese" = "Portuguese";
+"currentlanguage" = "currentLanguage";
+"enterlanguages" = "enter languages";
+
+
+"Languages" = "Languages";
+"Cancel" = "Cancel";
+
+
