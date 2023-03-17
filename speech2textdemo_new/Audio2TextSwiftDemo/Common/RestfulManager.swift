@@ -8,11 +8,12 @@
 
 import UIKit
 import SVProgressHUD
-
 private let kTokenNamekey = "kTokenNamekey"
 private let kTaskIDkey = "kTaskIDkey"
 
 class RestfulManager: NSObject {
+    
+ 
     
     private var timeOutClourse:(()->Void)?
     private let limitTime:TimeInterval = 600
@@ -79,7 +80,7 @@ class RestfulManager: NSObject {
         
         let request = NSMutableURLRequest(url: url)
         configCommonHeader(request)
-//        request.addValue("Application/json", forHTTPHeaderField: "Content-Type")
+        //        request.addValue("Application/json", forHTTPHeaderField: "Content-Type")
         let params = "{\"instanceId\":\"\(channel)\"}"
         request.httpMethod = "POST"
         request.httpBody = params.data(using: .utf8)
@@ -96,7 +97,7 @@ class RestfulManager: NSObject {
                 }
                 
                 self.showErrorAlert(json)
-
+                
             }
         }
         httpTask.resume()
@@ -111,52 +112,6 @@ class RestfulManager: NSObject {
     }
     
     // Turn on speech-to-text
-    func start2(channelName:String,uid:String,token:String = "",channelType:String = "LIVE_TYPE", completion:((_ status:String,_ err:Error?,_ json:String?)->Void)?, timeOut:@escaping ()->Void) {
-        
-        let Address = KeyCenter.GatewayAddress
-        let AppId = KeyCenter.AppId
-        var language = LanguageManager.shared.currentSysLanguage().code
-        if LanguageManager.shared.currentLanguageCode != ""{
-            language = LanguageManager.shared.currentLanguageCode
-        }
-        
-        reset()
-        self.timeOutClourse = timeOut
-        self.getBuilderToken(channelName, completion: { tokenName in
-            let urlString = Address + "/v1/projects/"+AppId+"/rtsc/speech-to-text/tasks?builderToken=" + tokenName
-            
-            guard let url = URL(string: urlString) else { return  }
-            let params = "{\"audio\": {\"subscribeSource\": \"AGORARTC\",\"agoraRtcConfig\": {\"channelName\": \"\(channelName)\",\"uid\": \"\(RestfulManager.audioUid)\",\"token\": \"\(token)\",\"channelType\": \"\(channelType)\",\"subscribeConfig\": {\"subscribeMode\": \"CHANNEL_MODE\"},\"maxIdleTime\": 60}},\"config\": {\"features\": [\"RECOGNIZE\"],\"recognizeConfig\": {\"language\": \"\(language)\",\"model\": \"Model\",\"onnectionTimeout\": 60,\"output\": {\"destinations\": [\"AgoraRTCDataStream\"],\"agoraRTCDataStream\": {\"channelName\": \"\(channelName)\",\"uid\": \"\(RestfulManager.dataStreamUid)\",\"token\": \"\(token)\"}}}}}"
-
-            print("url ==",url)
-            print("params ===",params)
-            
-            let request = NSMutableURLRequest(url: url)
-            self.configCommonHeader(request)
-//            request.addValue("Application/json", forHTTPHeaderField: "Content-Type")
-            request.httpMethod = "POST"
-            request.httpBody = params.data(using: .utf8)
-            let httpTask = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
-                if error == nil {
-                    let json:[String:Any]? = try? JSONSerialization.jsonObject(with: data!, options: .fragmentsAllowed) as? [String : Any]
-                    let taskId:String = json?["taskId"] as? String ?? ""
-                    let status:String = json?["status"] as? String ?? ""
-                    print("taskId == ",taskId,"status == ",status,"json ==",json ?? "")
-                    self.taskId = taskId
-                    DispatchQueue.main.async {
-                        completion?(status,nil,json?.debugDescription)
-                    }
-                }else{
-                    DispatchQueue.main.async {
-                        completion?("",error,nil)
-                    }
-                }
-                self.timer?.fireDate = Date(timeIntervalSinceNow: self.limitTime)
-            }
-            httpTask.resume()
-        })
-    }
-    
     func start(channelName:String,uid:String,token:String = "",channelType:String = "LIVE_TYPE", completion:((_ status:String,_ err:Error?,_ json:String?)->Void)?, timeOut:@escaping ()->Void) {
         
         let Address = KeyCenter.GatewayAddress
@@ -173,13 +128,13 @@ class RestfulManager: NSObject {
             
             guard let url = URL(string: urlString) else { return  }
             let params = "{\"audio\": {\"subscribeSource\": \"AGORARTC\",\"agoraRtcConfig\": {\"channelName\": \"\(channelName)\",\"uid\": \"\(RestfulManager.audioUid)\",\"token\": \"\(token)\",\"channelType\": \"\(channelType)\",\"subscribeConfig\": {\"subscribeMode\": \"CHANNEL_MODE\"},\"maxIdleTime\": 60}},\"config\": {\"features\": [\"RECOGNIZE\"],\"recognizeConfig\": {\"language\": \"\(language)\",\"model\": \"Model\",\"onnectionTimeout\": 60,\"output\": {\"destinations\": [\"AgoraRTCDataStream\"],\"agoraRTCDataStream\": {\"channelName\": \"\(channelName)\",\"uid\": \"\(RestfulManager.dataStreamUid)\",\"token\": \"\(token)\"}}}}}"
-
+            
             print("url ==",url)
             print("params ===",params)
             
             let request = NSMutableURLRequest(url: url)
             self.configCommonHeader(request)
-//            request.addValue("Application/json", forHTTPHeaderField: "Content-Type")
+            //            request.addValue("Application/json", forHTTPHeaderField: "Content-Type")
             request.httpMethod = "POST"
             request.httpBody = params.data(using: .utf8)
             let httpTask = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
@@ -201,6 +156,60 @@ class RestfulManager: NSObject {
             }
             httpTask.resume()
         })
+    }
+    
+    func start2(channelName:String,uid:String,token:String = "",channelType:String = "LIVE_TYPE", completion:((_ status:String,_ err:Error?,_ json:String?)->Void)?, timeOut:@escaping ()->Void) {
+        
+//        let Address = KeyCenter.wsURI
+        //        let AppId = KeyCenter.AppId
+        var language = LanguageManager.shared.currentSysLanguage().code
+        if LanguageManager.shared.currentLanguageCode != ""{
+            language = LanguageManager.shared.currentLanguageCode
+        }
+        
+        reset()
+        self.timeOutClourse = timeOut
+                
+        /*
+         self.getBuilderToken(channelName, completion: { tokenName in
+         
+         
+         
+         let urlString = Address + "/v1/projects/"+AppId+"/rtsc/speech-to-text/tasks?builderToken=" + tokenName
+         
+         guard let url = URL(string: urlString) else { return  }
+         let params = "{\"audio\": {\"subscribeSource\": \"AGORARTC\",\"agoraRtcConfig\": {\"channelName\": \"\(channelName)\",\"uid\": \"\(RestfulManager.audioUid)\",\"token\": \"\(token)\",\"channelType\": \"\(channelType)\",\"subscribeConfig\": {\"subscribeMode\": \"CHANNEL_MODE\"},\"maxIdleTime\": 60}},\"config\": {\"features\": [\"RECOGNIZE\"],\"recognizeConfig\": {\"language\": \"\(language)\",\"model\": \"Model\",\"onnectionTimeout\": 60,\"output\": {\"destinations\": [\"AgoraRTCDataStream\"],\"agoraRTCDataStream\": {\"channelName\": \"\(channelName)\",\"uid\": \"\(RestfulManager.dataStreamUid)\",\"token\": \"\(token)\"}}}}}"
+         
+         print("url ==",url)
+         print("params ===",params)
+         
+         let request = NSMutableURLRequest(url: url)
+         self.configCommonHeader(request)
+         //            request.addValue("Application/json", forHTTPHeaderField: "Content-Type")
+         request.httpMethod = "POST"
+         request.httpBody = params.data(using: .utf8)
+         let httpTask = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
+         if error == nil {
+         let json:[String:Any]? = try? JSONSerialization.jsonObject(with: data!, options: .fragmentsAllowed) as? [String : Any]
+         let taskId:String = json?["taskId"] as? String ?? ""
+         let status:String = json?["status"] as? String ?? ""
+         print("taskId == ",taskId,"status == ",status,"json ==",json ?? "")
+         self.taskId = taskId
+         DispatchQueue.main.async {
+         completion?(status,nil,json?.debugDescription)
+         }
+         }else{
+         DispatchQueue.main.async {
+         completion?("",error,nil)
+         }
+         }
+         self.timer?.fireDate = Date(timeIntervalSinceNow: self.limitTime)
+         }
+         httpTask.resume()
+         
+         
+         })
+         */
     }
     
     
@@ -246,7 +255,7 @@ class RestfulManager: NSObject {
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = "DELETE"
         configCommonHeader(request)
-//        request.addValue("Application/json", forHTTPHeaderField: "Content-Type")
+        //        request.addValue("Application/json", forHTTPHeaderField: "Content-Type")
         let httpTask = URLSession.shared.dataTask(with: request as URLRequest) {[weak self] data, response, error in
             if error == nil {
                 let json:[String:Any]? = try? JSONSerialization.jsonObject(with: data!, options: .fragmentsAllowed) as? [String : Any]
@@ -265,6 +274,10 @@ class RestfulManager: NSObject {
     
     // stop speech-to-text
     func stop(completion:((_ err:Error?)->Void)?) {
+        
+        //        AgoraWebSocketManager.shared.disconnect()
+        
+        
         self.timer?.fireDate = Date.distantFuture
         guard let tokenName = self.tokenName else {
             print("token is nil")
@@ -319,7 +332,7 @@ class RestfulManager: NSObject {
             }
             UserDefaults.standard.set(base64Credentials, forKey: KeyCenter.kAuthorizationBase64Key)
             UserDefaults.standard.synchronize()
-        
+            
             return base64Credentials
         }
         

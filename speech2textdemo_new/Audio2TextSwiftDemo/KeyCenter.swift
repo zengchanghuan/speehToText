@@ -33,6 +33,6 @@ struct KeyCenter {
     static var namesArray:[String] = [String]()
     
     
-    static var wsURI = "wss://<endpoint>/has/asr/review/stream/api/v1/ws"
+    static let wsURI = "wss://<endpoint>/has/asr/review/stream/api/v1/ws"
     
 }

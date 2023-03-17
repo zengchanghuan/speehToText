@@ -17,7 +17,6 @@
 		841251AD29965AF2006AB150 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841251AC29965AF2006AB150 /* LanguageManager.swift */; };
 		84527054299DC7F300E92DBE /* DownloadManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84527053299DC7F300E92DBE /* DownloadManager.mm */; };
 		84527057299DC8B600E92DBE /* AVCodeParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 84527056299DC8B600E92DBE /* AVCodeParam.m */; };
-		8E41FC4929C1749100F05AB2 /* AgoraWebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E41FC4829C1749100F05AB2 /* AgoraWebSocketManager.swift */; };
 		A818D64227F85E88003E4603 /* STTFilesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A818D64127F85E88003E4603 /* STTFilesManager.m */; };
 		A818D64927F85E9C003E4603 /* STTFilesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A818D64427F85E9B003E4603 /* STTFilesTableViewController.m */; };
 		A818D64A27F85E9C003E4603 /* STTChannelSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A818D64527F85E9B003E4603 /* STTChannelSTableViewController.m */; };
@@ -66,7 +65,6 @@
 		84527053299DC7F300E92DBE /* DownloadManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DownloadManager.mm; sourceTree = "<group>"; };
 		84527055299DC8B600E92DBE /* AVCodeParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVCodeParam.h; sourceTree = "<group>"; };
 		84527056299DC8B600E92DBE /* AVCodeParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVCodeParam.m; sourceTree = "<group>"; };
-		8E41FC4829C1749100F05AB2 /* AgoraWebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgoraWebSocketManager.swift; sourceTree = "<group>"; };
 		9F050139709185279E29253B /* Pods-Audio2TextSwiftDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Audio2TextSwiftDemo.debug.xcconfig"; path = "Target Support Files/Pods-Audio2TextSwiftDemo/Pods-Audio2TextSwiftDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		A818D64027F85E88003E4603 /* STTFilesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTFilesManager.h; sourceTree = "<group>"; };
 		A818D64127F85E88003E4603 /* STTFilesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTFilesManager.m; sourceTree = "<group>"; };
@@ -274,7 +272,6 @@
 				A8F785A327EAC424007BE8A2 /* LogViewController.swift */,
 				A8F785A927EAC8D8007BE8A2 /* GlobalSettings.swift */,
 				A8F785C327EC22B4007BE8A2 /* Audio2TextSwiftDemo-Bridging-Header.h */,
-				8E41FC4829C1749100F05AB2 /* AgoraWebSocketManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -402,7 +399,6 @@
 			files = (
 				8412519129933E75006AB150 /* LanguageAlertView.swift in Sources */,
 				841251AD29965AF2006AB150 /* LanguageManager.swift in Sources */,
-				8E41FC4929C1749100F05AB2 /* AgoraWebSocketManager.swift in Sources */,
 				A8F785A027EAC217007BE8A2 /* BaseViewController.swift in Sources */,
 				A818D64927F85E9C003E4603 /* STTFilesTableViewController.m in Sources */,
 				A8F7858D27EABEA1007BE8A2 /* ViewController.swift in Sources */,
