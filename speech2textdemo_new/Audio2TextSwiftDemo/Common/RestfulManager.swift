@@ -75,7 +75,7 @@ class RestfulManager: NSObject {
         let urlString = Address + "/v1/projects/"+AppId+"/rtsc/speech-to-text/builderTokens"
         guard let url = URL(string: urlString) else { return  }
         
-        print("url ==",url)
+//        print("url ==",url)
         
         let request = NSMutableURLRequest(url: url)
         configCommonHeader(request)

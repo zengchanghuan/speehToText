@@ -12,6 +12,7 @@ target 'Audio2TextSwiftDemo' do
   pod "Protobuf","3.19.4"
   pod "YYText"
   pod 'SVProgressHUD','2.2.5'
-  
+  pod 'Starscream', '~> 4.0.0'
+
 end
 

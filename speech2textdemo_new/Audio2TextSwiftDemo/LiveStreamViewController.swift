@@ -33,7 +33,136 @@ enum ChannelType:String {
     case LIVE_TYPE,COMMUNICATION_TYPE
 }
 
-class LiveStreamViewController: BaseViewController {
+class LiveStreamViewController: BaseViewController, AgoraAudioDataFrameProtocol {
+    let speechWebSocketClient = SpeechWebSocketClient()
+    var seqNo = 0
+
+    var fileHandle: FileHandle?
+
+    func onPlaybackAudioFrame(_ frame: AgoraAudioFrame) -> Bool {
+        return true
+    }
+    
+    func onMixedAudioFrame(_ frame: AgoraAudioFrame) -> Bool {
+        return true
+    }
+    
+    func onPlaybackAudioFrame(beforeMixing frame: AgoraAudioFrame, uid: UInt) -> Bool {
+        return true
+    }
+    
+    func isMultipleChannelFrameWanted() -> Bool {
+        return true
+    }
+    
+    func onPlaybackAudioFrame(beforeMixingEx frame: AgoraAudioFrame, channelId: String, uid: UInt) -> Bool {
+        print("onPlaybackAudioFrame(beforeMixingEx:) called with frame: \(frame), channelId: \(channelId), uid: \(uid)")
+        // 在这里添加您的实现代码
+        return true // 按需修改返回值
+    }
+
+    func getObservedAudioFramePosition() -> AgoraAudioFramePosition {
+        print("getObservedAudioFramePosition called")
+        // 在这里添加您的实现代码
+        return .record // 按需修改返回值
+    }
+
+    func onRecord(_ frame: AgoraAudioFrame) -> Bool {
+           // 获取音频数据的指针
+           guard let audioData = frame.buffer else {
+               print("Error: Failed to access audio data buffer.")
+               return false
+           }
+
+           // 确保音频格式是 pcm_s16le，即每个样本占用2字节
+           guard frame.bytesPerSample == 2 else {
+               print("Error: Unsupported audio format. Expecting pcm_s16le (2 bytes per sample).")
+               return false
+           }
+
+           // 计算音频数据的大小
+           let dataSize = Int(frame.samplesPerChannel * frame.channels * frame.bytesPerSample)
+
+           // 将音频数据复制到一个 Int16 数组中
+           let audioBuffer = UnsafeMutableBufferPointer<Int16>.allocate(capacity: dataSize / 2)
+           audioData.assumingMemoryBound(to: Int16.self).assign(from: audioBuffer.baseAddress!, count: dataSize / 2)
+
+           // 处理音频数据
+           processAudioData(audioBuffer)
+
+           // 释放分配的内存
+           audioBuffer.deallocate()
+
+           return true
+       }
+    
+    func processAudioData(_ audioData: UnsafeMutableBufferPointer<Int16>) {
+        // 在这里处理音频数据
+
+          // 将 UnsafeMutableBufferPointer<Int16> 转换为 Data 类型
+          let audioDataBytes = Data(bytes: audioData.baseAddress!, count: audioData.count * MemoryLayout<Int16>.size)
+
+          // 设置序列号
+//          let seqNo = 0 // 或者使用递增的序列号
+
+          // 调用 sendAddAudio 方法
+        speechWebSocketClient.sendAddAudio(audioData: audioDataBytes, seqNo: seqNo)
+        
+    }
+    func convertAudioFrameToData(frame: AgoraAudioFrame) -> Data? {
+        guard let buffer = frame.buffer else {
+            return nil
+        }
+        let count = Int(frame.samplesPerChannel * frame.channels * frame.bytesPerSample)
+        let data = Data(bytes: buffer, count: count)
+        return data
+    }
+
+    /*
+    private func convertToPCM(data: UnsafeMutableRawPointer?, size: Int) -> Data {
+         let format = AVAudioFormat(commonFormat: .pcmFormatInt16, sampleRate: 16000, channels: 1, interleaved: true)
+         let audioBuffer = AVAudioPCMBuffer(pcmFormat: format!, frameCapacity: 16000)!
+         let audioBufferPointer = audioBuffer.int16ChannelData!
+         let dataPointer = data?.assumingMemoryBound(to: Int16.self)
+         for i in 0..<audioBuffer.frameCapacity {
+             audioBufferPointer[0][Int(i)] = dataPointer![Int(i)]
+         }
+         audioBuffer.frameLength = audioBuffer.frameCapacity
+        let pcmData = audioBuffer.int16ChannelData!.withMemoryRebound(to: UInt8.self, capacity: Int(audioBuffer.frameLength) * Int(format!.streamDescription.pointee.mBytesPerFrame)) {
+            return Data(bytes: $0, count: Int(audioBuffer.frameLength) * Int(format!.streamDescription.pointee.mBytesPerFrame))
+         }
+         return pcmData
+     }
+     
+     private func sendAudioDataToSpeechmatics(_ data: String) {
+         let bytesPerFrame = Int(frame.samplesPerChannel) * Int(frame.channels) * Int(frame.bytesPerSample)
+         let audioData = frame.buffer!.assumingMemoryBound(to: UInt8.self)
+         let audioDataBuffer = UnsafeBufferPointer(start: audioData, count: bytesPerFrame)
+         let audioDataArray = Array(audioDataBuffer)
+         let audioDataNSData = Data(bytes: audioDataArray)
+
+         speechWebSocketClient.write(data: audioDataNSData)
+         
+     }
+      */
+      func getPlaybackAudioParams() -> AgoraAudioParam {
+          let audioParam = AgoraAudioParam()
+          // 在这里设置播放音频参数
+          return audioParam
+      }
+      
+      func getMixedAudioParams() -> AgoraAudioParam {
+          print("getMixedAudioParams called")
+          let audioParam = AgoraAudioParam()
+          return audioParam
+      }
+
+      func getRecordAudioParams() -> AgoraAudioParam {
+          print("getRecordAudioParams called")
+          let audioParam = AgoraAudioParam()
+          return audioParam
+      }
+    
     // user list
     var usersArray = [UserModel]()
     var headCollectionView:UICollectionView?
@@ -75,6 +204,8 @@ class LiveStreamViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let seqNo = 0 // 或者使用递增的序列号
+
         // set up agora instance when view loadedlet config = AgoraRtcEngineConfig()
         let config = AgoraRtcEngineConfig()
         config.appId = KeyCenter.AppId
@@ -140,6 +271,8 @@ class LiveStreamViewController: BaseViewController {
         agoraKit.setRecordingAudioFrameParametersWithSampleRate(44100, channel: 1, mode: audioConfiguration!, samplesPerCall: 1024)
         agoraKit.setPlaybackAudioFrameParametersWithSampleRate(44100, channel: 1, mode: audioConfiguration!, samplesPerCall: 1024)
         agoraKit.setMixedAudioFrameParametersWithSampleRate(44100, samplesPerCall: 1024)
+        
+        agoraKit.setAudioDataFrame(self)
     }
     // MARK: logo
     func addBgImgView() {
@@ -586,6 +719,7 @@ extension LiveStreamViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
 
 extension LiveStreamViewController {
     func rtcEngine(_ engine: AgoraRtcEngineKit, didRecord audioFrame: AgoraAudioFrame) -> Bool {
