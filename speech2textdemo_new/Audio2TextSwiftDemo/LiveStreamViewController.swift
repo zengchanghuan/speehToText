@@ -124,6 +124,9 @@ class LiveStreamViewController: BaseViewController {
             // en: https://docs.agora.io/en/Voice/API%20Reference/oc/Constants/AgoraErrorCode.html
             // cn: https://docs.agora.io/cn/Voice/API%20Reference/oc/Constants/AgoraErrorCode.html
             self.showAlert(title: "Error", message: "joinChannel call failed: \(result), please check your params")
+        } else {
+            setupAudioFrameParameters()
+
         }
         
         // UI
@@ -132,6 +135,12 @@ class LiveStreamViewController: BaseViewController {
         addSettledTextView()
     }
     
+    func setupAudioFrameParameters() {
+        let audioConfiguration = AgoraAudioRawFrameOperationMode(rawValue: AgoraAudioRawFrameOperationMode.readWrite.rawValue)
+        agoraKit.setRecordingAudioFrameParametersWithSampleRate(44100, channel: 1, mode: audioConfiguration!, samplesPerCall: 1024)
+        agoraKit.setPlaybackAudioFrameParametersWithSampleRate(44100, channel: 1, mode: audioConfiguration!, samplesPerCall: 1024)
+        agoraKit.setMixedAudioFrameParametersWithSampleRate(44100, samplesPerCall: 1024)
+    }
     // MARK: logo
     func addBgImgView() {
         view.backgroundColor = .white
@@ -576,4 +585,26 @@ extension LiveStreamViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+}
+
+extension LiveStreamViewController {
+    func rtcEngine(_ engine: AgoraRtcEngineKit, didRecord audioFrame: AgoraAudioFrame) -> Bool {
+        print("Recorded audio frame: \(audioFrame)")
+        return true
+    }
+
+    func rtcEngine(_ engine: AgoraRtcEngineKit, willPlayback audioFrame: AgoraAudioFrame) -> Bool {
+        print("Playback audio frame: \(audioFrame)")
+        return true
+    }
+
+    func rtcEngine(_ engine: AgoraRtcEngineKit, willMixedPlayback audioFrame: AgoraAudioFrame) -> Bool {
+        print("Mixed playback audio frame: \(audioFrame)")
+        return true
+    }
+
+    func rtcEngine(_ engine: AgoraRtcEngineKit, willPlaybackEx audioFrame: AgoraAudioFrame, uid: UInt) -> Bool {
+        print("Playback audio frame for uid: \(uid), frame: \(audioFrame)")
+        return true
+    }
 }
